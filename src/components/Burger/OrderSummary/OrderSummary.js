@@ -10,9 +10,11 @@ const orderSummary = (props) => {
     })
     return (
         <div>
+            Your Yummy Burger With Following Ingredients Is Ready
             <ul>
                 {ingredientSummary}
             </ul>
+            <p>Do You Want To Checkout!!</p>
         </div>
     )
 }
