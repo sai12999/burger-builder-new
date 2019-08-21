@@ -12,15 +12,19 @@ const burger = (props) => {
         return arr.concat(curr)
     }, [])
 
-    if(transformedIngredients.length === 0) {
+    if (transformedIngredients.length === 0) {
         transformedIngredients = <p>Please Start Adding Ingredients</p>
     }
-    
+
     return (
         <div className={classes.Burger}>
             <BurgerIngredients type="bread-top" />
             {transformedIngredients}
             <BurgerIngredients type="bread-bottom" />
+            <div>
+                <label>Price Of Your Burger : </label>
+                {props.price}$
+            </div>
         </div>
     )
 }
