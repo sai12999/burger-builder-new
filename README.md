@@ -1,4 +1,4 @@
-Live Demo Available at this [Link] (https://sai12999.github.io/burger-builder-new/)
+Live Demo Available at this [Demo](https://sai12999.github.io/burger-builder-new/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
