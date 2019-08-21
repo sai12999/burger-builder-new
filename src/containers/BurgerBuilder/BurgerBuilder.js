@@ -4,6 +4,8 @@ import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import RoundToTwoDecimal from '../../common/RoundToTwoDecimal'
 import Modal from '../../components/UI/Modal/Modal'
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
+
 
 const INGREDIENT_PRICES = {
     meat: 0.6,
@@ -68,7 +70,9 @@ class BurgerBuilder extends Component {
         }
         return (
             <Auxiliary>
-                <Modal/>
+                <Modal>
+                    <OrderSummary ingredients={this.state.ingredients} />
+                </Modal>
                 <Burger
                     ingredients={this.state.ingredients}
                     price={this.state.totalPrice}
