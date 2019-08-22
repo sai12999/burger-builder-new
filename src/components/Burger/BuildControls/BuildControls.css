@@ -39,6 +39,10 @@
     animation: enable 0.3s linear;
 }
 
+.Label {
+    color : blue;
+}
+
 @keyframes enable {
     0% {
         transform: scale(1);

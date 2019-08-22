@@ -1,12 +1,14 @@
 import React from 'react'
 import classes from './Button.css'
 
-const button = () => {
+const button = (props) => {
     return (
         <div
-            className={[classes.button, classes[props.btnType]].join(" ")}
+            className={[classes.Button, classes[props.btnType]].join(" ")}
             onClick={props.clicked}>
             {props.children}
         </div>
     )
 }
+
+export default button

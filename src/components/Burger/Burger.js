@@ -18,10 +18,6 @@ const burger = (props) => {
 
     return (
         <div className={classes.Burger}>
-            <div>
-                <label>Price Of Your Burger : </label>
-                {props.price}$
-            </div>
             <BurgerIngredients type="bread-top" />
             {transformedIngredients}
             <BurgerIngredients type="bread-bottom" />

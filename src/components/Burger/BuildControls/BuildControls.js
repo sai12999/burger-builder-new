@@ -11,23 +11,27 @@ const controls = [
 const BuildControls = (props) => {
 
     return (
-        <div className={classes.BuildControls}>
-            {controls.map(ctrl => (
-                <BuildControl key={ctrl.label}
-                    label={ctrl.label}
-                    added={props.ingredientAdded}
-                    deleted={props.ingredientDeleted}
-                    type={ctrl.type}
-                    disabled={props.disabled[ctrl.type]}
-                />
-            ))}
-            <button
-                className={classes.OrderButton}
-                disabled={!props.purchasable}
-                onClick = {()=>props.purchasingHandler()}>
-                Order Now
+            <div className={classes.BuildControls}>
+                <div>
+                    <label className={classes.Label}>Price Of Your Burger : </label>
+                    {props.price}$
+                </div>
+                {controls.map(ctrl => (
+                    <BuildControl key={ctrl.label}
+                        label={ctrl.label}
+                        added={props.ingredientAdded}
+                        deleted={props.ingredientDeleted}
+                        type={ctrl.type}
+                        disabled={props.disabled[ctrl.type]}
+                    />
+                ))}
+                <button
+                    className={classes.OrderButton}
+                    disabled={!props.purchasable}
+                    onClick={() => props.purchasingHandler()}>
+                    Order Now
             </button>
-        </div>
+            </div>
     )
 }
 

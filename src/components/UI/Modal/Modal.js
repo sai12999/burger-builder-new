@@ -2,7 +2,6 @@ import React from 'react'
 import classes from './Modal.css'
 import Auxiliary from '../../../hoc/Auxiliary'
 import BackDrop from '../BackDrop/BackDrop'
-import Button from '../Button/Button'
 
 const modal = (props) => (
     <Auxiliary>
@@ -11,7 +10,6 @@ const modal = (props) => (
             className={classes.Modal}
             style={{ transform: props.show ? 'translateY(0)' : 'translateY(-100vh)' }}>
             {props.children}
-        
         </div>
     </Auxiliary>
 )
