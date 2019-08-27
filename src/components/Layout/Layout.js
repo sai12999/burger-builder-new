@@ -14,7 +14,7 @@ class Layout extends Component {
     }
 
     sideDrawerToggleHandler() {
-        this.state.open === true ? this.state.open = false : this.state.open = true
+        this.state.open === true ? this.setState({ open : false }) : this.setState({ open : true })
         this.setState({ open: true })
     }
 
