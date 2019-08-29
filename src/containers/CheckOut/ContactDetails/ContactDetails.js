@@ -15,12 +15,16 @@ class ContactDetails extends Component {
         },
         loading : false
     }
+    componentDidMount()
+    {
+        console.log('contactdetails mounted')
+    }
     orderHandler=(event)=>
     {
         event.preventDefault()
         this.setState({ loading: true })
         const order = {
-            ingredients: this.state.ingredients,
+            ingredients: this.props.ingredients,
             price: this.props.price,
             customer: {
                 name: 'sam',
