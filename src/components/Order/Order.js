@@ -1,6 +1,5 @@
 import React from 'react'
 import classes from './Order.css'
-import { identifier } from '@babel/types';
 
 const order = (props) => {
     let ingredients = Object.keys(this.props.ingredients).map(ingredient=>{

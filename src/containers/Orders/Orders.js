@@ -7,22 +7,24 @@ class Orders extends Component {
         orders : null
     }
     componentDidMount() {
-        axios.get('https://react-db-9d268.firebaseio.com/orders').then(orders=>{
-            this.setState({orders:orders})
+        console.log("orders mounted")
+        axios.get('/orders.json').then(orders=>{
+            this.setState({orders:orders.data})
         })
+        
     }
     render() {
         let orders = null
-        console.log('orders :'+this.state.orders)
+        let fetchedOrders='';
         if(this.state.orders)
         {
-            orders=this.state.orders.map(order=>{
-                return <Order ingredients={order.ingredients} price={order.price} />
-            })
+            for(let order in orders){
+                fetchedOrders +=  (<Order ingredients={order.ingredients} price={order.price}/>)
+            }
         }
         return (
             <div>
-                {orders}
+                {fetchedOrders}
             </div>
         )
     }
