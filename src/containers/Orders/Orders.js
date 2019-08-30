@@ -1,33 +1,39 @@
 import React, { Component } from 'react'
 import Order from '../../components/Order/Order'
 import axios from '../../axios-orders'
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 class Orders extends Component {
-    state ={
-        orders : null
+    state = {
+        orders: null,
+        loading: true
     }
+
     componentDidMount() {
-        console.log("orders mounted")
-        axios.get('/orders.json').then(orders=>{
-            this.setState({orders:orders.data})
+        axios.get('/orders.json').then(orders => {
+            this.setState({ orders: orders.data, loading: false })
         })
-        
     }
+
     render() {
-        let orders = null
-        let fetchedOrders='';
-        if(this.state.orders)
-        {
-            for(let order in orders){
-                fetchedOrders +=  (<Order ingredients={order.ingredients} price={order.price}/>)
-            }
+        let spinner = null
+        if (this.state.loading)
+            spinner = <Spinner />
+        let fetchedOrders = null
+        if (this.state.orders) {
+            const orders = this.state.orders
+            fetchedOrders = Object.keys(orders).reverse().map(order => {
+                return (<Order key={order} ingredients={orders[order].ingredients} price={orders[order].price} />)
+            })
         }
         return (
             <div>
+                {spinner}
                 {fetchedOrders}
             </div>
         )
     }
 }
 
-export default Orders
+export default withErrorHandler(Orders, axios)
