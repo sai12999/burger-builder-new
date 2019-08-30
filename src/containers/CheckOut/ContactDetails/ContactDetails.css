@@ -12,9 +12,7 @@
     display: block;
 }
 
-.Form{
-    margin: auto
-}
+
 @media(min-width:600px){
     .ContactDetails{
         width: 500px;
