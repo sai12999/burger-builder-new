@@ -10,7 +10,7 @@ function App() {
     <div >
       <Layout>
         <Route exact path='/'  component={BurgerBuilder} />
-        <Route  path='/checkout'  component={CheckOut} />
+        <Route path='/checkout'  component={CheckOut} />
         <Route path='/orders' component={Orders}/>
       </Layout>
     </div>

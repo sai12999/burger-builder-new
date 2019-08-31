@@ -5,6 +5,7 @@ import axios from '../../../axios-orders'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import { withRouter } from 'react-router-dom'
 import Input from '../../../components/UI/Input/Input'
+import {connect} from 'react-redux'
 
 class ContactDetails extends Component {
     state = {
@@ -92,7 +93,10 @@ class ContactDetails extends Component {
         }
         return valid
     }
-
+    componentDidMount()
+    {
+        console.log("Assam")
+    }
     orderHandler = (event) => {
         event.preventDefault()
         this.setState({ loading: true })
@@ -165,4 +169,10 @@ class ContactDetails extends Component {
     }
 }
 
-export default withRouter(ContactDetails)
+const mapStateToProps = (state)=>{
+    return {
+        ingredients : state.ingredients,
+        price : state.totalPrice
+    }
+}
+export default connect(mapStateToProps)(withRouter(ContactDetails))
