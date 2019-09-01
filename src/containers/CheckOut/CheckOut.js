@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import ContactDetails from './ContactDetails/ContactDetails'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 class CheckOut extends Component {
 
@@ -14,27 +14,33 @@ class CheckOut extends Component {
         this.props.history.goBack();
     }
 
-    componentDidMount() {
-        console.log("checkout mounted")
-    }
-
     render() {
-        console.log(this.props.match.url + '/contactdetails')
+        let summary = Redirect('/')
+        if (this.props.ingredients) {
+            const purchased = this.props.purchased?Redirect('/'):null
+            summary = (
+                <div>
+                    {purchased}
+                    <h2 style={{ textAlign: 'center' }}>Burger Preview</h2>
+                    <CheckoutSummary ingredients={this.props.ingredients}
+                        checkoutContinue={this.checkoutContinueHandler.bind(this)}
+                        checkoutCancel={this.checkoutCancelHandler.bind(this)} />
+                    <Route exact path={this.props.match.url + '/contactdetails'} component={ContactDetails} />
+                </div>
+            )
+        }
         return (
             <div>
-                <h2 style={{ textAlign: 'center' }}>Burger Preview</h2>
-                <CheckoutSummary ingredients={this.props.ingredients}
-                    checkoutContinue={this.checkoutContinueHandler.bind(this)}
-                    checkoutCancel={this.checkoutCancelHandler.bind(this)} />
-                <Route exact path={this.props.match.url + '/contactdetails'} component={ContactDetails}/>
+                {summary}
             </div>
         )
     }
 
 }
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state) => {
     return {
-        ingredients : state.ingredients,
+        ingredients: state.burgerBuilder.ingredients,
+        purchased : state.order.purchased
     }
 }
 export default connect(mapStateToProps)(CheckOut)

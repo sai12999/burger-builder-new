@@ -6,6 +6,8 @@ import Spinner from '../../../components/UI/Spinner/Spinner'
 import { withRouter } from 'react-router-dom'
 import Input from '../../../components/UI/Input/Input'
 import {connect} from 'react-redux'
+import * as orderActions from '../../../store/actions/index'
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 
 class ContactDetails extends Component {
     state = {
@@ -78,8 +80,7 @@ class ContactDetails extends Component {
                 isTouched : false
             }
         },
-        isValid : false,
-        loading: false
+        isValid : false
     }
 
     validityHandler = (value, rules) => {
@@ -93,10 +94,7 @@ class ContactDetails extends Component {
         }
         return valid
     }
-    componentDidMount()
-    {
-        console.log("Assam")
-    }
+   
     orderHandler = (event) => {
         event.preventDefault()
         this.setState({ loading: true })
@@ -109,11 +107,8 @@ class ContactDetails extends Component {
             price: this.props.price,
             orderData: orderData
         }
-        axios.post('/orders.json', order)
-            .then(res => this.setState({ loading: false }))
-            .catch(error =>
-                this.setState({ loading: false }))
-        this.props.history.push('/')
+        this.props.purchaseBurger(order)
+        
     }
 
     changeHandler = (event, inputElement) => {
@@ -140,7 +135,6 @@ class ContactDetails extends Component {
             <form onSubmit={this.orderHandler}>
                 {
                     formArray.map(formElement => {
-                        console.log("istouched"+formElement.id.isTouched)
                         return (
                             <Input
                                 key={formElement.id}
@@ -157,8 +151,7 @@ class ContactDetails extends Component {
                 <Button btnType="Success" disabled={!this.state.isValid} clicked={this.orderHandler}>Order</Button>
             </form>
         )
-        console.log(this.state.ordersForm)
-        if (this.state.loading)
+        if (this.props.loading)
             form = <Spinner />
         return (
             <div className={classes.ContactDetails}>
@@ -171,8 +164,15 @@ class ContactDetails extends Component {
 
 const mapStateToProps = (state)=>{
     return {
-        ingredients : state.ingredients,
-        price : state.totalPrice
+        ingredients : state.burgerBuilder.ingredients,
+        price : state.burgerBuilder.totalPrice,
+        loading : state.order.loading
     }
 }
-export default connect(mapStateToProps)(withRouter(ContactDetails))
+
+const mapActionsToProps = (dispatcher)=>{
+    return{
+        purchaseBurger : (orderData)=>dispatcher(orderActions.purchaseBurger(orderData)),
+    }
+}
+export default connect(mapStateToProps, mapActionsToProps)(withRouter(withErrorHandler(ContactDetails, axios)))

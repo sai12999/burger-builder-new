@@ -3,7 +3,7 @@ import classes from './Order.css'
 
 const order = (props) => {
     let i = 0
-    console.log(props.ingredients)
+ 
     let ingredients = Object.keys(props.ingredients).map(ingredient => {
         return (
             <span style={{
@@ -16,7 +16,7 @@ const order = (props) => {
             }} key={i++}>{ingredient} : {props.ingredients[ingredient]} </span>
         )
     })
-    console.log(props.ingredients)
+
     return (
         <div className={classes.Order}>
             <b>Ingredients</b> : {ingredients}
