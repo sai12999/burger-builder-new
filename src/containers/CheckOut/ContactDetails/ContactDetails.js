@@ -108,7 +108,7 @@ class ContactDetails extends Component {
             orderData: orderData
         }
         this.props.purchaseBurger(order)
-        
+        this.props.history.push('/')
     }
 
     changeHandler = (event, inputElement) => {
